@@ -29,10 +29,10 @@ load_dotenv()
 main_path = os.getenv('MAIN_PATH')
 
 # Define chat id
-# GROUP_ID = os.getenv('LOCKSMITHS_GROUP')
+GROUP_ID = os.getenv('LOCKSMITHS_GROUP')
 
 # For TEST
-GROUP_ID = os.getenv('TEST_GROUP')
+# GROUP_ID = os.getenv('TEST_GROUP')
 
 
 ################################## Query Load #####################################
