@@ -72,7 +72,7 @@ within the windows scheduler.
 
 # Sales report
 
-<img src="images/sales_chat_.png" width="250"/>
+<img src="images/sales_chat.png" width="250"/>
 
 In the image above you can see what the chat and report look like within Telegram.
 
@@ -103,7 +103,7 @@ Just look the 'sales.bat' in your files and click it, or used within a task insi
 
 # Locksmith report
 
-<img src="images/xx.jpg" width="250"/>
+<img src="images\locksmiths_chat.png" width="250"/>
 
 In the image above you can see what the chat and report look like within Telegram.
 
