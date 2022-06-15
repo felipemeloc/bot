@@ -72,7 +72,7 @@ within the windows scheduler.
 
 # Sales report
 
-<img src="images/Sales_chat_.png" width="250"/>
+<img src="images/sales_chat_.png" width="250"/>
 
 In the image above you can see what the chat and report look like within Telegram.
 
