@@ -39,23 +39,23 @@ GROUP_ID = os.getenv('SALES_GROUP')
 query_path = os.path.join(os.getenv('MAIN_PATH'), 'queries/sales')
 
 SL_company_conversion_day = open(os.path.join(query_path,
-                    'SL_company_conversion_day.txt'), 'r').read()
+                    'SL_company_conversion_day.sql'), 'r').read()
 
 SL_total_conversion_day = open(os.path.join(query_path,
-                    'SL_total_conversion_day.txt'), 'r').read()
+                    'SL_total_conversion_day.sql'), 'r').read()
 
 SL_company_conversion_hour = open(os.path.join(query_path,
-                    'SL_company_conversion_hour.txt'), 'r').read()
+                    'SL_company_conversion_hour.sql'), 'r').read()
 
 SL_total_conversion_hour = open(os.path.join(query_path,
-                    'SL_total_conversion_hour.txt'), 'r').read()
+                    'SL_total_conversion_hour.sql'), 'r').read()
 
 SL_staff_day = open(os.path.join(query_path,
-                    'SL_staff_day.txt'), 'r').read()
+                    'SL_staff_day.sql'), 'r').read()
 
 
 SL_staff_hour= open(os.path.join(query_path,
-                    'SL_staff_hour.txt'), 'r').read()
+                    'SL_staff_hour.sql'), 'r').read()
 
 
 def main():

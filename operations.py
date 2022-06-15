@@ -39,23 +39,23 @@ GROUP_ID = os.getenv('OPERATIONS_GROUP')
 query_path = os.path.join(os.getenv('MAIN_PATH'), 'queries\operations')
 
 OPE_task_per_dep = open(os.path.join(query_path,
-                    'OPE_task_per_dep.txt'), 'r').read()
+                    'OPE_task_per_dep.sql'), 'r').read()
 
 OPE_total_task_closed_day = open(os.path.join(query_path,
-                                'OPE_total_task_closed_day.txt'), 'r').read()
+                                'OPE_total_task_closed_day.sql'), 'r').read()
 
 
 OPE_total_task_closed_hour = open(os.path.join(query_path,
-                                        'OPE_total_task_closed_hour.txt'), 'r').read()
+                                        'OPE_total_task_closed_hour.sql'), 'r').read()
 
 OPE_total_actions_completed_day = open(os.path.join(query_path,
-            'OPE_total_actions_completed_day.txt'), 'r').read()
+            'OPE_total_actions_completed_day.sql'), 'r').read()
 
 OPE_total_actions_completed_hour = open(os.path.join(query_path,
-            'OPE_total_actions_completed_hour.txt'), 'r').read()
+            'OPE_total_actions_completed_hour.sql'), 'r').read()
 
 OPE_top_5 = open(os.path.join(query_path,
-            'OPE_top.txt'), 'r').read()
+            'OPE_top.sql'), 'r').read()
 
 def main():
     """Main function, it is in charge of:

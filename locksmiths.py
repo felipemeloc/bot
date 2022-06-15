@@ -40,12 +40,12 @@ GROUP_ID = os.getenv('LOCKSMITHS_GROUP')
 query_path = os.path.join(os.getenv('MAIN_PATH'), 'queries/locksmiths')
 
 LS_total_jobs_by_locksmith_day = open(os.path.join(query_path,
-                    'LS_total_jobs_by_locksmith_day.txt'), 'r').read()
+                    'LS_total_jobs_by_locksmith_day.sql'), 'r').read()
 
 LS_total_jobs_day = open(os.path.join(query_path,
-                    'LS_total_jobs_day.txt'), 'r').read()
+                    'LS_total_jobs_day.sql'), 'r').read()
 # query = open(os.path.join(query_path,
-#                     'query.txt'), 'r').read()
+#                     'query.sql'), 'r').read()
 
 def main():
     """Main function, it is in charge of:
