@@ -110,4 +110,4 @@ In the image above you can see what the chat and report look like within Telegra
 ## locksmiths.py
 
 This is the main python script to generate the report for the group of locksmith.
-This code makes use of a series of queries saved inside the '**./queries/locksmiths/**' path, all these queries are '**.txt**' files and can be modified as needed. The queries uses the Live Soter Datafr
+This code makes use of a series of queries saved inside the '**./queries/locksmiths/**' path, all these queries are '**.txt**' files and can be modified as needed. 

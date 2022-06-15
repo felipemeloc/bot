@@ -22,11 +22,21 @@ import src.bot as bot
 from tabulate import tabulate
 import src.utils_bot as utils_bot
 from dotenv import load_dotenv
+import logging
 
 # Load environment variables
 load_dotenv()
 # Define project main path
-main_path = os.getenv('MAIN_PATH')
+MAIN_FOLDER = os.getenv('MAIN_PATH')
+
+# LOG File save
+log_file = os.path.join(MAIN_FOLDER, 'logs/locksmiths_batch.log')
+logger = logging.getLogger(__name__)
+handler = logging.FileHandler(log_file)
+formatter = logging.Formatter('%(asctime)s - %(levelname)s - %(message)s')
+handler.setFormatter(formatter)
+logger.addHandler(handler)
+logger.setLevel(logging.INFO)
 
 # Define chat id
 GROUP_ID = os.getenv('LOCKSMITHS_GROUP')
@@ -37,7 +47,7 @@ GROUP_ID = os.getenv('LOCKSMITHS_GROUP')
 
 ################################## Query Load #####################################
 
-query_path = os.path.join(os.getenv('MAIN_PATH'), 'queries/locksmiths')
+query_path = os.path.join(MAIN_FOLDER, 'queries/locksmiths')
 
 LS_total_pending_jobs_by_locksmith_day = open(os.path.join(query_path,
                     'LS_total_pending_jobs_by_locksmith_day.sql'), 'r').read()
@@ -89,20 +99,20 @@ def main():
 {locksmiths_revenue}\n
 {total_revenue}\n
 """
-    print('-'*60,'\n',operations_message,'-'*60)
+    # logger.info('-'*60,'\n',operations_message,'-'*60)
+    logger.info(operations_message)
     bot.send_message(GROUP_ID, operations_message)
 
 if __name__ == '__main__':
     try:
         NOW = pd.Timestamp.now()
-        print(NOW)
         hour = NOW.hour
-        print('Bot online')
+        logger.info('Bot online')
         # Time validation to check if the hour is between 6 and 21
         if hour >= 6 and hour <= 21:
             main()
-            print('Process Successful')
+            logger.info('Process Successful')
         else:
-            print('Execution after hours')
+            logger.info('Execution after hours')
     except Exception as e:
-        print(e)
+        logger.error(e)
