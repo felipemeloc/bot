@@ -10,6 +10,7 @@ The script needs the installation of the following packages:
 * os: For path management and directory creation
 * pandas: Return a DataFrame object
 * dotenv: Load environment variables
+* logging: Log management
 
 This script uses the following custom modules:
 * src: Adapt the format of the data to be printed on Telegram
