@@ -78,7 +78,8 @@ def df_staff_sales_to_str(o_df:pd.DataFrame)->str:
 
 def df_locksmith_to_str(o_df:pd.DataFrame)->str:
     df = o_df.copy()
-    df['Locksmit'] = df['Locksmit'].str.lower().replace(r'wgtk[\s]*[\-]*', '', regex=True).str.replace(r'[\s]+',' ',regex=True).str.strip().str.capitalize()
+    df['Locksmith'] = df['Locksmith'].str.lower().replace(r'wgtk[\s]*[\-]*', '', regex=True).str.replace(r'\(.*\)', '', regex=True).str.replace(r'[\s]+',' ',regex=True).str.strip().str.capitalize()
+    df = df.groupby('Locksmith', as_index=False).sum().sort_values(df.columns[-1], ascending=False)
     str_df = df_to_str(df)
     return str_df
 
