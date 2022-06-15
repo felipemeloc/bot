@@ -88,7 +88,7 @@ def main():
     locksmiths_revenue = utils_bot.df_locksmith_to_str( db.sql_to_df(LS_total_revenue_by_locksmith_day), money_col='Revenue')
     total_revenue = utils_bot.trans_one_row(db.sql_to_df(LS_total_revenue_day), money=True)
     
-    operations_message = f"""{date}\n
+    message = f"""{date}\n
 *TODAY'S PENDING JOBS:*\n
 {locksmiths_jobs_pending}\n
 {total_jobs_pending}\n
@@ -100,8 +100,8 @@ def main():
 {total_revenue}\n
 """
     # logger.info('-'*60,'\n',operations_message,'-'*60)
-    logger.info(operations_message)
-    bot.send_message(GROUP_ID, operations_message)
+    logger.info(message)
+    bot.send_message(GROUP_ID, message)
 
 if __name__ == '__main__':
     try:
