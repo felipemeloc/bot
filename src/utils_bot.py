@@ -20,7 +20,7 @@ Contains the following function:
 import pandas as pd
 from tabulate import tabulate
 
-def trans_one_row(df:pd.DataFrame)->str:
+def trans_one_row(df:pd.DataFrame, money=False)->str:
     """Function for convert a SQL query into a string to be printed in the chatbot.
     Function made for dataframes of shape (1,1).
 
@@ -36,7 +36,10 @@ def trans_one_row(df:pd.DataFrame)->str:
         key = df.columns[0]
         val = df.iloc[0,0]
         # Adapt information to be printed
-        return f'*{key}*: {val}'
+        if money:
+            return f'*{key}*: £{val}'
+        else:
+            return f'*{key}*: {val}'
     else:
         print('The df should have a shape equal to (1, 1)')
         raise
@@ -76,10 +79,12 @@ def df_staff_sales_to_str(o_df:pd.DataFrame)->str:
     df_str = tabulate(df, showindex=False, headers=df.columns, tablefmt="prety", numalign='rigth')
     return df_str
 
-def df_locksmith_to_str(o_df:pd.DataFrame)->str:
+def df_locksmith_to_str(o_df:pd.DataFrame, money_col:str=None)->str:
     df = o_df.copy()
     df['Locksmith'] = df['Locksmith'].str.lower().replace(r'wgtk[\s]*[\-]*', '', regex=True).str.replace(r'\(.*\)', '', regex=True).str.replace(r'[\s]+',' ',regex=True).str.strip().str.capitalize()
     df = df.groupby('Locksmith', as_index=False).sum().sort_values(df.columns[-1], ascending=False)
+    if money_col:
+        df[money_col] = '£' + df[money_col].astype(str)
     str_df = df_to_str(df)
     return str_df
 
