@@ -15,6 +15,20 @@ Contains the following function:
     import utils_bot
     utils_bot.df_to_str(df= YOUR_DATAFRAME,
                         title= 'YOUR TITLE')
+
+* df_staff_sales_to_str: Return string for table. The function add the £ simbol for money in the sales project.
+
+    import utils_bot
+    utils_bot.df_staff_sales_to_str(o_df = YOUR_DATAFRAME
+        )
+
+* df_locksmith_to_str: Return string for table. The function add the £ simbol for money in the locksmith project.
+                       The function requeres that the column to be converted to money is define.
+
+    import utils_bot
+    utils_bot.df_locksmith_to_str(o_df = YOUR_DATAFRAME,
+                                  money_col = 'YOUR_COLUMN_NAME')
+
 """
 
 import pandas as pd
