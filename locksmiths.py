@@ -29,23 +29,28 @@ load_dotenv()
 main_path = os.getenv('MAIN_PATH')
 
 # Define chat id
-GROUP_ID = os.getenv('LOCKSMITHS_GROUP')
+# GROUP_ID = os.getenv('LOCKSMITHS_GROUP')
 
 # For TEST
-# GROUP_ID = os.getenv('TEST_GROUP')
+GROUP_ID = os.getenv('TEST_GROUP')
 
 
 ################################## Query Load #####################################
 
 query_path = os.path.join(os.getenv('MAIN_PATH'), 'queries/locksmiths')
 
-LS_total_jobs_by_locksmith_day = open(os.path.join(query_path,
-                    'LS_total_jobs_by_locksmith_day.sql'), 'r').read()
+LS_total_pending_jobs_by_locksmith_day = open(os.path.join(query_path,
+                    'LS_total_pending_jobs_by_locksmith_day.sql'), 'r').read()
 
-LS_total_jobs_day = open(os.path.join(query_path,
-                    'LS_total_jobs_day.sql'), 'r').read()
-# query = open(os.path.join(query_path,
-#                     'query.sql'), 'r').read()
+LS_total_pending_jobs_day = open(os.path.join(query_path,
+                    'LS_total_pending_jobs_day.sql'), 'r').read()
+
+LS_total_completed_jobs_by_locksmith_day = open(os.path.join(query_path,
+                    'LS_total_completed_jobs_by_locksmith_day.sql'), 'r').read()
+
+LS_total_completed_jobs_day = open(os.path.join(query_path,
+                    'LS_total_completed_jobs_day.sql'), 'r').read()
+
 
 def main():
     """Main function, it is in charge of:
@@ -55,21 +60,21 @@ def main():
     * Send report to Telegram
     """    
     date =  pd.Timestamp.now().strftime('%A, %d %B %H:%M')
-    # Today's conversion Report queries to the database
-    locksmiths_jobs = utils_bot.df_locksmith_to_str( db.sql_to_df(LS_total_jobs_by_locksmith_day))
-    total_jobs = utils_bot.trans_one_row(db.sql_to_df(LS_total_jobs_day))
+    # Today's Pending Jobs
+    locksmiths_jobs_pending = utils_bot.df_locksmith_to_str( db.sql_to_df(LS_total_pending_jobs_by_locksmith_day))
+    total_jobs_pending = utils_bot.trans_one_row(db.sql_to_df(LS_total_pending_jobs_day))
 
-   
-    # hour1 = utils_bot.df_to_str(db.sql_to_df(XXX))
-    # hour2 = utils_bot.trans_one_row(db.sql_to_df(XXX))
-    # staff1 = db.sql_to_df(XXX)
-    # staff1['Name'] = staff1['Name'].str.slice(0,12)
-    # staff1 = tabulate(staff1, showindex=False, headers=staff1.columns, tablefmt="prety", numalign='rigth')
+    # Today's Completed Jobs
+    locksmiths_jobs_completed = utils_bot.df_locksmith_to_str( db.sql_to_df(LS_total_completed_jobs_by_locksmith_day))
+    total_jobs_completed = utils_bot.trans_one_row(db.sql_to_df(LS_total_completed_jobs_day))
     
     operations_message = f"""{date}\n
-*TODAY'S JOBS:*\n
-{locksmiths_jobs}\n
-{total_jobs}\n
+*TODAY'S PENDING JOBS:*\n
+{locksmiths_jobs_pending}\n
+{total_jobs_pending}\n
+*TODAY'S COMPLETED JOBS:*\n
+{locksmiths_jobs_completed}\n
+{total_jobs_completed}\n
 """
     print('-'*60,'\n',operations_message,'-'*60)
     bot.send_message(GROUP_ID, operations_message)
