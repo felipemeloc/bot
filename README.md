@@ -39,7 +39,7 @@ This is a curtom module to adapt the format of the data (queries results) to be 
 
 # Operations report
 
-<img src="images/operations_chat.jpg" width="250"/>
+<img src="images/operations_chat.png" width="250"/>
 
 In the image above you can see what the chat and report look like within Telegram.
 
@@ -72,7 +72,7 @@ within the windows scheduler.
 
 # Sales report
 
-<img src="images/sales_chat.jpg" width="250"/>
+<img src="images/Sales_chat.png" width="250"/>
 
 In the image above you can see what the chat and report look like within Telegram.
 
