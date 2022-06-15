@@ -38,10 +38,10 @@ logger.addHandler(handler)
 logger.setLevel(logging.INFO)
 
 # Define chat id
-# GROUP_ID = os.getenv('OPERATIONS_GROUP')
+GROUP_ID = os.getenv('OPERATIONS_GROUP')
 
 # For TEST
-GROUP_ID = os.getenv('TEST_GROUP')
+# GROUP_ID = os.getenv('TEST_GROUP')
 
 
 ################################## Query Load #####################################
