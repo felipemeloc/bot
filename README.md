@@ -14,6 +14,8 @@ The environment variables file must be in the main folder of the project with th
 * MAIN_PATH = Project main path
 * TEST_GROUP = Chat id of the TEST group
 * OPERATIONS_GROUP = Chat id of the OPERATIONS group
+* SALES_GROUP = Chat id of the SALES group
+* LOCKSMITHS_GROUP = Chat id of the LOCKSMITH group
 
 To get the chats ids you must use this link, after adding the bot as admin to the new group look inside the response JSON for the necessary chat id.
 ```
