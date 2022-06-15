@@ -51,6 +51,12 @@ LS_total_completed_jobs_by_locksmith_day = open(os.path.join(query_path,
 LS_total_completed_jobs_day = open(os.path.join(query_path,
                     'LS_total_completed_jobs_day.sql'), 'r').read()
 
+LS_total_revenue_by_locksmith_day = open(os.path.join(query_path,
+                    'LS_total_revenue_by_locksmith_day.sql'), 'r').read()
+
+LS_total_revenue_day = open(os.path.join(query_path,
+                    'LS_total_revenue_day.sql'), 'r').read()
+
 
 def main():
     """Main function, it is in charge of:
@@ -67,6 +73,10 @@ def main():
     # Today's Completed Jobs
     locksmiths_jobs_completed = utils_bot.df_locksmith_to_str( db.sql_to_df(LS_total_completed_jobs_by_locksmith_day))
     total_jobs_completed = utils_bot.trans_one_row(db.sql_to_df(LS_total_completed_jobs_day))
+
+    # Today's Revenue 
+    locksmiths_revenue = utils_bot.df_locksmith_to_str( db.sql_to_df(LS_total_revenue_by_locksmith_day), money_col='Revenue')
+    total_revenue = utils_bot.trans_one_row(db.sql_to_df(LS_total_revenue_day), money=True)
     
     operations_message = f"""{date}\n
 *TODAY'S PENDING JOBS:*\n
@@ -75,6 +85,9 @@ def main():
 *TODAY'S COMPLETED JOBS:*\n
 {locksmiths_jobs_completed}\n
 {total_jobs_completed}\n
+*TODAY'S REVENUE:*\n
+{locksmiths_revenue}\n
+{total_revenue}\n
 """
     print('-'*60,'\n',operations_message,'-'*60)
     bot.send_message(GROUP_ID, operations_message)
