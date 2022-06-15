@@ -21,22 +21,32 @@ import src.db as db
 import src.bot as bot
 import src.utils_bot as utils_bot
 from dotenv import load_dotenv
+import logging
 
 # Load environment variables
 load_dotenv()
 # Define project main path
-main_path = os.getenv('MAIN_PATH')
+MAIN_FOLDER = os.getenv('MAIN_PATH')
+
+# LOG File save
+log_file = os.path.join(MAIN_FOLDER, 'logs/sales_batch.log')
+logger = logging.getLogger(__name__)
+handler = logging.FileHandler(log_file)
+formatter = logging.Formatter('%(asctime)s - %(levelname)s - %(message)s')
+handler.setFormatter(formatter)
+logger.addHandler(handler)
+logger.setLevel(logging.INFO)
 
 # Define chat id
-GROUP_ID = os.getenv('SALES_GROUP')
+# GROUP_ID = os.getenv('SALES_GROUP')
 
 # For TEST
-# GROUP_ID = os.getenv('TEST_GROUP')
+GROUP_ID = os.getenv('TEST_GROUP')
 
 
 ################################## Query Load #####################################
 
-query_path = os.path.join(os.getenv('MAIN_PATH'), 'queries/sales')
+query_path = os.path.join(MAIN_FOLDER, 'queries/sales')
 
 SL_company_conversion_day = open(os.path.join(query_path,
                     'SL_company_conversion_day.sql'), 'r').read()
@@ -79,7 +89,7 @@ def main():
     staff1 = utils_bot.df_staff_sales_to_str(staff1)
     staff2 = db.sql_to_df(SL_staff_hour)
     staff2 =  utils_bot.df_staff_sales_to_str(staff2)
-    operations_message = f"""{date}\n
+    message = f"""{date}\n
 *TODAY'S CONVERSION:*\n
 {today1}\n
 {today2}\n
@@ -92,20 +102,19 @@ def main():
 *Hour Sales*
 {staff2}
 """
-    print('-'*60,'\n',operations_message,'-'*60)
-    bot.send_message(GROUP_ID, operations_message)
+    logger.info(message)
+    bot.send_message(GROUP_ID, message)
 
 if __name__ == '__main__':
     try:
         NOW = pd.Timestamp.now()
-        print(NOW)
         hour = NOW.hour
-        print('Bot online')
+        logger.info('Bot online')
         # Time validation to check if the hour is between 6 and 21
         if hour >= 6 and hour <= 21:
             main()
-            print('Process Successful')
+            logger.info('Process Successful')
         else:
-            print('Execution after hours')
+            logger.info('Execution after hours')
     except Exception as e:
-        print(e)
+        logger.error(e)
