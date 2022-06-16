@@ -1,12 +1,13 @@
 ------------- Today's revenue by locksmiths 
 SELECT
-SB.LocksmithName AS "Locksmith",
+SB.RecipientName AS "Locksmith",
 SUM(SB.NetCost) AS "Revenue"
 FROM 
 (
 SELECT
 LD.*,
 LS.LocksmithName,
+PF.RecipientName,
 PF.NetCost
 FROM [dbo].[Policy_LocksmithDetails] LD
 LEFT JOIN [dbo].[Lookup_Locksmiths] LS
@@ -26,5 +27,5 @@ AND LD.ReportID IN (
 AND CAST(LD.AvailableFromDate AS DATE) = CAST(GETDATE() AS DATE)
 ) AS SB
 WHERE SB.NetCost IS NOT NULL
-GROUP BY SB.LocksmithName
+GROUP BY SB.RecipientName
 ORDER BY SUM(SB.NetCost) DESC
