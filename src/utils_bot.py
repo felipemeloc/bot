@@ -95,10 +95,11 @@ def df_staff_sales_to_str(o_df:pd.DataFrame)->str:
 
 def df_locksmith_to_str(o_df:pd.DataFrame, money_col:str=None)->str:
     df = o_df.copy()
-    df['Locksmith'] = df['Locksmith'].str.lower().replace(r'wgtk[\s]*[\-]*', '', regex=True).str.replace(r'\(.*\)', '', regex=True).str.replace(r'[\s]+',' ',regex=True).str.strip().str.capitalize()
-    df = df.groupby('Locksmith', as_index=False).sum().sort_values(df.columns[-1], ascending=False)
-    if money_col:
-        df[money_col] = '£' + df[money_col].astype(str)
+    if not df.empty:
+        df['Locksmith'] = df['Locksmith'].str.lower().replace(r'wgtk[\s]*[\-]*', '', regex=True).str.replace(r'\(.*\)', '', regex=True).str.replace(r'[\s]+',' ',regex=True).str.strip().str.capitalize()
+        df = df.groupby('Locksmith', as_index=False).sum().sort_values(df.columns[-1], ascending=False)
+        if money_col:
+            df[money_col] = '£' + df[money_col].astype(str)
     str_df = df_to_str(df)
     return str_df
 

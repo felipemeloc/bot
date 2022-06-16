@@ -40,10 +40,10 @@ logger.addHandler(handler)
 logger.setLevel(logging.INFO)
 
 # Define chat id
-GROUP_ID = os.getenv('LOCKSMITHS_GROUP')
+# GROUP_ID = os.getenv('LOCKSMITHS_GROUP')
 
 # For TEST
-# GROUP_ID = os.getenv('TEST_GROUP')
+GROUP_ID = os.getenv('TEST_GROUP')
 
 
 ################################## Query Load #####################################
@@ -116,4 +116,4 @@ if __name__ == '__main__':
         else:
             logger.info('Execution after hours')
     except Exception as e:
-        logger.error(e)
+        logger.exception(e)
