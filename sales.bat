@@ -1,2 +1,2 @@
 @echo off
-python ".\sales.py" %*
+".venv/Scripts/python.exe" ".\sales.py" %*

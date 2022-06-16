@@ -1,2 +1,2 @@
 @echo off
-python ".\operations.py" %*
+".venv/Scripts/python.exe" ".\operations.py" %*

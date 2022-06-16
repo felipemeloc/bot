@@ -1,2 +1,2 @@
 @echo off
-python ".\locksmiths.py" %*
+".venv/Scripts/python.exe" ".\locksmiths.py" %*
