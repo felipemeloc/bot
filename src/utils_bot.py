@@ -114,7 +114,7 @@ def selected_vs_invoice_locksmiths(o_df:pd.DataFrame)->str:
         df = df[df['LocksmithName'] != df['RecipientName']][['ReportID', 'NetCost']]
         if not df.empty:
             df['NetCost'] = '£' + df['NetCost'].astype(str)
-            str_df = df_to_str(df, title= 'Not maching locksmiths')
+            str_df = df_to_str(df, title= 'Not matching locksmiths')
             return str_df
 
 def completed_job_revenue_by_locksmith_day(o_df:pd.DataFrame)->str:
