@@ -1,6 +1,6 @@
 ------------- Today's revenue locksmiths 
 SELECT
-SUM(SB.NetCost) AS "Revenue"
+SUM(SB.NetCost) AS "Total revenue"
 FROM 
 (
 SELECT

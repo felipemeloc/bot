@@ -1,6 +1,6 @@
 ------------- Today's total pending locksmiths jobs
 SELECT
-COUNT(*) AS "Number jobs"
+COUNT(*) AS "Total pending jobs"
 FROM 
 (
 SELECT

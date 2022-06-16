@@ -1,6 +1,6 @@
 ------------- Today's total completed locksmiths jobs
 SELECT
-COUNT(*) AS "Number jobs"
+COUNT(*) AS "Total completed jobs"
 FROM 
 (
 SELECT

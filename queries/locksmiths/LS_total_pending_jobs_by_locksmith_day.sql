@@ -1,7 +1,7 @@
 ------------- Today's pending jobs by locksmiths 
 SELECT
 SB.LocksmithName AS "Locksmith",
-COUNT(*) AS "Number jobs"
+COUNT(*) AS "Pending jobs"
 FROM 
 (
 SELECT

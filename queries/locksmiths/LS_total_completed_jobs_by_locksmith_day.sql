@@ -1,7 +1,7 @@
 ------------- Today's completed jobs by locksmiths 
 SELECT
 SB.LocksmithName AS "Locksmith",
-COUNT(*) AS "Number jobs"
+COUNT(*) AS "Completed jobs"
 FROM 
 (
 SELECT
