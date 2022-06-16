@@ -6,7 +6,6 @@ FROM
 (
 SELECT
 LD.*,
-LS.LocksmithName,
 PF.RecipientName,
 PF.NetCost
 FROM [dbo].[Policy_LocksmithDetails] LD
