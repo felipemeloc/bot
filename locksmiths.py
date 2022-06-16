@@ -68,6 +68,9 @@ LS_total_revenue_by_locksmith_day = open(os.path.join(query_path,
 LS_total_revenue_day = open(os.path.join(query_path,
                     'LS_total_revenue_day.sql'), 'r').read()
 
+LS_selected_vs_invoice_locksmiths = open(os.path.join(query_path,
+                    'LS_selected_vs_invoice_locksmiths.sql'), 'r').read()
+
 
 def main():
     """Main function, it is in charge of:
@@ -89,6 +92,9 @@ def main():
     locksmiths_revenue = utils_bot.df_locksmith_to_str( db.sql_to_df(LS_total_revenue_by_locksmith_day), money_col='Revenue')
     total_revenue = utils_bot.trans_one_row(db.sql_to_df(LS_total_revenue_day), money=True)
     
+    # Not maching locksmiths
+    selected_vs_invoice_locksmiths = utils_bot.selected_vs_invoice_locksmiths(db.sql_to_df(LS_selected_vs_invoice_locksmiths))
+    
     message = f"""{date}\n
 *TODAY'S PENDING JOBS:*\n
 {locksmiths_jobs_pending}\n
@@ -100,6 +106,9 @@ def main():
 {locksmiths_revenue}\n
 {total_revenue}\n
 """
+    if selected_vs_invoice_locksmiths:
+        message = message + f"""*DISCREPANCY FOUND:*\n
+{selected_vs_invoice_locksmiths}"""
     # logger.info('-'*60,'\n',operations_message,'-'*60)
     logger.info(message)
     bot.send_message(GROUP_ID, message)

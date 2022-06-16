@@ -93,13 +93,27 @@ def df_staff_sales_to_str(o_df:pd.DataFrame)->str:
     df_str = tabulate(df, showindex=False, headers=df.columns, tablefmt="prety", numalign='rigth')
     return df_str
 
+def clean_locksmith_name(col:pd.Series)->pd.Series:
+    return col.str.lower().replace(r'wgtk[\s]*[\-]*', '', regex=True).str.replace(r'\(.*\)', '', regex=True).str.replace(r'[\s]+',' ',regex=True).str.strip().str.capitalize()
+
 def df_locksmith_to_str(o_df:pd.DataFrame, money_col:str=None)->str:
     df = o_df.copy()
     if not df.empty:
-        df['Locksmith'] = df['Locksmith'].str.lower().replace(r'wgtk[\s]*[\-]*', '', regex=True).str.replace(r'\(.*\)', '', regex=True).str.replace(r'[\s]+',' ',regex=True).str.strip().str.capitalize()
+        df['Locksmith'] = clean_locksmith_name(df['Locksmith'])
         df = df.groupby('Locksmith', as_index=False).sum().sort_values(df.columns[-1], ascending=False)
         if money_col:
             df[money_col] = '£' + df[money_col].astype(str)
     str_df = df_to_str(df)
     return str_df
 
+def selected_vs_invoice_locksmiths(o_df:pd.DataFrame)->str:
+    if not o_df.empty:
+        df = o_df.copy()
+        df['LocksmithName'] = clean_locksmith_name(df['LocksmithName'])
+        df['RecipientName'] = clean_locksmith_name(df['RecipientName'])
+        df = df[df['LocksmithName'] != df['RecipientName']][['ReportID', 'NetCost']]
+        if not df.empty:
+            df['NetCost'] = '£' + df['NetCost'].astype(str)
+            str_df = df_to_str(df, title= 'Not maching locksmiths')
+            return str_df
+    
