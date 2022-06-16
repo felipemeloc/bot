@@ -10,7 +10,8 @@ ON LD.LocksmithID = LS.ID
 LEFT JOIN [dbo].[Policy_Financial] PF
 ON LD.ReportID = PF.ReportID
 WHERE LD.Selected = 1
-AND LS.LocksmithName LIKE ('WGTK%')
+AND (PF.RecipientName LIKE ('WGTK%') OR LS.LocksmithName LIKE ('WGTK%'))
+AND PF.RecipientName NOT LIKE ('WGTK Cancellation%')
 AND LD.ReportID IN (
 	SELECT
 	DISTINCT(PD.ReportID)

@@ -9,12 +9,10 @@ LD.*,
 PF.RecipientName,
 PF.NetCost
 FROM [dbo].[Policy_LocksmithDetails] LD
-LEFT JOIN [dbo].[Lookup_Locksmiths] LS
-ON LD.LocksmithID = LS.ID
 LEFT JOIN [dbo].[Policy_Financial] PF
 ON LD.ReportID = PF.ReportID
 WHERE LD.Selected = 1
-AND LS.LocksmithName LIKE ('WGTK%')
+AND PF.RecipientName LIKE ('WGTK%')
 AND LD.ReportID IN (
 	SELECT
 	DISTINCT(PD.ReportID)
