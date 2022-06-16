@@ -56,14 +56,8 @@ LS_total_pending_jobs_by_locksmith_day = open(os.path.join(query_path,
 LS_total_pending_jobs_day = open(os.path.join(query_path,
                     'LS_total_pending_jobs_day.sql'), 'r').read()
 
-LS_total_completed_jobs_by_locksmith_day = open(os.path.join(query_path,
-                    'LS_total_completed_jobs_by_locksmith_day.sql'), 'r').read()
-
 LS_total_completed_jobs_day = open(os.path.join(query_path,
                     'LS_total_completed_jobs_day.sql'), 'r').read()
-
-LS_total_revenue_by_locksmith_day = open(os.path.join(query_path,
-                    'LS_total_revenue_by_locksmith_day.sql'), 'r').read()
 
 LS_total_revenue_day = open(os.path.join(query_path,
                     'LS_total_revenue_day.sql'), 'r').read()
@@ -71,6 +65,8 @@ LS_total_revenue_day = open(os.path.join(query_path,
 LS_selected_vs_invoice_locksmiths = open(os.path.join(query_path,
                     'LS_selected_vs_invoice_locksmiths.sql'), 'r').read()
 
+LS_total_completed_job_revenue_by_locksmith_day = open(os.path.join(query_path,
+                    'LS_total_completed_job_revenue_by_locksmith_day.sql'), 'r').read()
 
 def main():
     """Main function, it is in charge of:
@@ -85,12 +81,9 @@ def main():
     total_jobs_pending = utils_bot.trans_one_row(db.sql_to_df(LS_total_pending_jobs_day))
 
     # Today's Completed Jobs
-    locksmiths_jobs_completed = utils_bot.df_locksmith_to_str( db.sql_to_df(LS_total_completed_jobs_by_locksmith_day))
-    total_jobs_completed = utils_bot.trans_one_row(db.sql_to_df(LS_total_completed_jobs_day))
-
-    # Today's Revenue 
-    locksmiths_revenue = utils_bot.df_locksmith_to_str( db.sql_to_df(LS_total_revenue_by_locksmith_day), money_col='Revenue')
+    locksmiths_jobs_revenue_completed = utils_bot.completed_job_revenue_by_locksmith_day(db.sql_to_df(LS_total_completed_job_revenue_by_locksmith_day))
     total_revenue = utils_bot.trans_one_row(db.sql_to_df(LS_total_revenue_day), money=True)
+    total_jobs_completed = utils_bot.trans_one_row(db.sql_to_df(LS_total_completed_jobs_day))
     
     # Not maching locksmiths
     selected_vs_invoice_locksmiths = utils_bot.selected_vs_invoice_locksmiths(db.sql_to_df(LS_selected_vs_invoice_locksmiths))
@@ -100,16 +93,13 @@ def main():
 {locksmiths_jobs_pending}\n
 {total_jobs_pending}\n
 *TODAY'S COMPLETED JOBS:*\n
-{locksmiths_jobs_completed}\n
-{total_jobs_completed}\n
-*TODAY'S REVENUE:*\n
-{locksmiths_revenue}\n
+{locksmiths_jobs_revenue_completed}\n
 {total_revenue}\n
+{total_jobs_completed}\n
 """
     if selected_vs_invoice_locksmiths:
         message = message + f"""*DISCREPANCY FOUND:*\n
 {selected_vs_invoice_locksmiths}"""
-    # logger.info('-'*60,'\n',operations_message,'-'*60)
     logger.info(message)
     bot.send_message(GROUP_ID, message)
 

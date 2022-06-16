@@ -116,4 +116,12 @@ def selected_vs_invoice_locksmiths(o_df:pd.DataFrame)->str:
             df['NetCost'] = '£' + df['NetCost'].astype(str)
             str_df = df_to_str(df, title= 'Not maching locksmiths')
             return str_df
-    
+
+def completed_job_revenue_by_locksmith_day(o_df:pd.DataFrame)->str:
+    df = o_df.copy()
+    if not df.empty:
+        df['Locksmith'] = clean_locksmith_name(df['Locksmith'])
+        df = df.groupby('Locksmith', as_index=False).sum().sort_values(['Revenue', 'No'], ascending=False)
+        df['Revenue'] = '£' + df['Revenue'].astype(str)
+    df_str = tabulate(df, showindex=False, headers=df.columns, tablefmt="prety", numalign='rigth')
+    return df_str
