@@ -118,4 +118,4 @@ if __name__ == '__main__':
         else:
             logger.info('Execution after hours')
     except Exception as e:
-        logger.error(e)
+        logger.exception(e)
