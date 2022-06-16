@@ -1,6 +1,6 @@
 ------------- Cases when the selected locksmith is not the same as the invoice's locksmith
 SELECT
-LD.ReportID,
+CAST(LD.ReportID AS VARCHAR(20)) AS ReportID,
 LS.LocksmithName,
 PF.RecipientName,
 PF.NetCost
