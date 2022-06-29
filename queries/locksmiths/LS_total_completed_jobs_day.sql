@@ -4,7 +4,7 @@ COUNT(*) AS "Total completed jobs"
 FROM 
 (
 SELECT
-LD.*,
+DISTINCT(LD.ReportID),
 PF.NetCost
 FROM [dbo].[Policy_LocksmithDetails] LD
 LEFT JOIN [dbo].[Policy_Financial] PF
