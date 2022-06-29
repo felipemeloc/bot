@@ -45,6 +45,7 @@ GROUP_ID = os.getenv('LOCKSMITHS_GROUP')
 # For TEST
 # GROUP_ID = os.getenv('TEST_GROUP')
 
+LOCKSMITHS_REPORT_IMAGE = os.getenv('LOCKSMITHS_REPORT_IMAGE')
 
 ################################## Query Load #####################################
 
@@ -93,8 +94,7 @@ def main():
 {locksmiths_jobs_pending}\n
 {total_jobs_pending}\n
 *TODAY'S COMPLETED JOBS:*\n
-{locksmiths_jobs_revenue_completed}\n
-{total_revenue}\n
+{total_revenue}
 {total_jobs_completed}\n
 """
     if selected_vs_invoice_locksmiths:
@@ -102,6 +102,9 @@ def main():
 {selected_vs_invoice_locksmiths}"""
     logger.info(message)
     bot.send_message(GROUP_ID, message)
+    
+    if os.path.exists(LOCKSMITHS_REPORT_IMAGE):
+        bot.send_photo(GROUP_ID, LOCKSMITHS_REPORT_IMAGE, 'Completed jobs summary')
 
 if __name__ == '__main__':
     try:
