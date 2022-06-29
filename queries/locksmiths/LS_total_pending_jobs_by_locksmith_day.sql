@@ -5,7 +5,7 @@ COUNT(*) AS "Pending jobs"
 FROM 
 (
 SELECT
-LD.*,
+DISTINCT(LD.ReportID),
 LS.LocksmithName,
 PF.NetCost
 FROM [dbo].[Policy_LocksmithDetails] LD
