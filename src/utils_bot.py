@@ -46,7 +46,7 @@ def trans_one_row(df:pd.DataFrame, money=False)->str:
     """    
     # Validate the dataframe shape
     if df.shape[0] == 1 and df.shape[1] == 1:
-        df = df.reset_index(drop=True)
+        df = df.reset_index(drop=True).fillna(0)
         key = df.columns[0]
         val = df.iloc[0,0]
         # Adapt information to be printed
