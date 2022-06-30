@@ -20,7 +20,6 @@ import os
 import pandas as pd
 import src.db as db
 import src.bot as bot
-from tabulate import tabulate
 import src.utils_bot as utils_bot
 from dotenv import load_dotenv
 import logging
@@ -114,5 +113,8 @@ if __name__ == '__main__':
             logger.info('Process Successful')
         else:
             logger.info('Execution after hours')
+        if os.path.exists(LOCKSMITHS_REPORT_IMAGE):
+            os.remove(LOCKSMITHS_REPORT_IMAGE)
+            logger.info('Locksmiths report image deleted')
     except Exception as e:
         logger.exception(e)
