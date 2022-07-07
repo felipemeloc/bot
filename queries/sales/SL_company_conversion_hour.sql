@@ -1,7 +1,8 @@
 -----------------------------------------------------------BY BROKER HOUR
 SELECT 
 CD.CompanyName AS 'Broker',
-CONCAT(ROUND((CAST(COUNT(PD.Amount) AS float) / CAST(COUNT(BD.ReportID) AS float) *100),2),'%') AS "Hour conversion"
+COUNT(BD.ReportID) AS "Cases",
+CONCAT(ROUND((CAST(COUNT(PD.Amount) AS float) / CAST(COUNT(BD.ReportID) AS float) *100),2),'%') AS "Conversion"
 FROM [dbo].[Policy_BrokersDetails] BD
 LEFT JOIN [dbo].[Policy_PaymentDetails] PD
 ON BD.ReportID = PD.ReportID
