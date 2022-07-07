@@ -90,6 +90,10 @@ def df_staff_sales_to_str(o_df:pd.DataFrame)->str:
     df = o_df.copy()
     df['Name'] = df['Name'].str.slice(0,12)
     df['Amount'] = '£' + df['Amount'].astype(str)
+    df_str = df_more_two_cols(df)
+    return df_str
+
+def df_more_two_cols(df:pd.DataFrame)->str:
     df_str = tabulate(df, showindex=False, headers=df.columns, tablefmt="prety", numalign='rigth')
     return df_str
 
@@ -123,5 +127,5 @@ def completed_job_revenue_by_locksmith_day(o_df:pd.DataFrame)->str:
         df['Locksmith'] = clean_locksmith_name(df['Locksmith'])
         df = df.groupby('Locksmith', as_index=False).sum().sort_values(['Revenue', 'No'], ascending=False)
         df['Revenue'] = '£' + df['Revenue'].astype(str)
-    df_str = tabulate(df, showindex=False, headers=df.columns, tablefmt="prety", numalign='rigth')
+    df_str = df_more_two_cols(df)
     return df_str
