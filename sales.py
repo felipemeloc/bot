@@ -78,11 +78,11 @@ def main():
     """    
     date =  pd.Timestamp.now().strftime('%A, %d %B %H:%M')
     # Today's conversion Report queries to the database
-    today1 = utils_bot.df_to_str(db.sql_to_df(SL_company_conversion_day))
+    today1 = utils_bot.df_more_two_cols(db.sql_to_df(SL_company_conversion_day))
     today2 = utils_bot.trans_one_row(db.sql_to_df(SL_total_conversion_day))
 
     # Hour conversion Report queries to the database
-    hour1 = utils_bot.df_to_str(db.sql_to_df(SL_company_conversion_hour))
+    hour1 = utils_bot.df_more_two_cols(db.sql_to_df(SL_company_conversion_hour))
     hour2 = utils_bot.trans_one_row(db.sql_to_df(SL_total_conversion_hour))
 
     # Staff Sales
